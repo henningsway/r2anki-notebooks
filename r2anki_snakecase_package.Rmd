@@ -1,0 +1,118 @@
+---
+title: "r2anki-Notebook: snakecase package"
+output:
+  html_document:
+    theme: "flatly"
+    highlight: "pygments"
+    self_contained: false  # false, so that images can be exported to anki as well
+    toc: true
+    toc_depth: 4
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+```{r, echo = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+
+<!-- #globaltags:  snakecase-pkg, strings -->
+
+Please check https://github.com/Tazinho/snakecase to learn more!
+
+
+******************
+#### Snakecase: String Conversion 1
+<!-- #tags: additional tags for this specific card -->
+**How to convert the names of the iris dataset into snake case**
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(names(iris), case = "snake", preprocess = "\\.")
+```
+<!-- end backside -->
+
+
+******************
+#### Snakecase: String Conversion 2
+<!-- #tags: additional tags for this specific card -->
+**How to convert the following string into the desired output** 
+```{r}
+string <- c("BobDylanUSA",
+            "MikhailGorbachevUSSR",
+            "IAmATallDrinkOfWater")
+```
+
+```{r, eval = FALSE}
+[1] "Bob Dylan USA"                 "Mikhail Gorbachev USSR"       "I Am A
+Tall Drink Of Water"
+```
+
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(string, case = "parsed", postprocess = " ")
+```
+<!-- end backside -->
+
+
+******************
+#### Snakecase: String Conversion 3
+<!-- #tags: additional tags for this specific card -->
+**How to convert this string into small camel case, with a dot as a separator?**
+```{r}
+string <- c("ICUDays","SexCode","MAX_of_MLD","Age.Group")
+```
+
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(string, case = "small_camel", preprocess = "\\.", postprocess =
+".")
+```
+<!-- end backside -->
+
+
+
+******************
+#### Snakecase: String Conversion 4
+<!-- #tags: additional tags for this specific card -->
+**How to convert the following string into snake case and leaving the decimal markers as they are?**
+```{r}
+string <- "R.Stüdio: v.1.0.143"
+```
+
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(string, case = "snake",
+            preprocess = ":|(?<!\\d)\\.",
+            protect = "\\.")
+```
+<!-- end backside -->
+
+
+******************
+#### Snakecase: String Conversion 5
+<!-- #tags: additional tags for this specific card -->
+**How to convert the following string into snake case and replace every non alphanumeric character with an underscore?**
+```{r}
+string <- "R.Stüdio: v.1.0.143"
+```
+
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(string, case = "snake",
+            protect = "[^[:alnum:]]")
+```
+<!-- end backside -->
+
+
+******************
+#### Snakecase: String Conversion 6
+<!-- #tags: additional tags for this specific card -->
+**How to turn the following string into snake case?**
+```{r}
+string <- "HAMBURGCity"
+```
+
+<!-- start backside --><br>
+```{r}
+snakecase::to_any_case(string, case = "snake")
+```
+<!-- end backside -->
