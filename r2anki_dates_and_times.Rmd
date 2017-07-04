@@ -1,0 +1,217 @@
+---
+title: "r2anki-Notebook: Dates and Times"
+output:
+  html_document:
+    theme: "flatly"
+    highlight: "pygments"
+    self_contained: false  # false, so that images can be exported to anki as well
+    toc: true
+    toc_depth: 4
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+<!-- setup for selective highlighting -->
+```{r, echo = FALSE}
+knitr::opts_chunk$set(comment = "#>", collapse = TRUE)
+```
+```{r tdvs-highlight-setup, include=FALSE}
+knitr::knit_hooks$set(source = function(x, options){
+  str_class <- ifelse(is.null(options$class),
+                      "",
+                      paste0(".", options$class, collapse = " "))
+
+  c(paste0("```{.r ", str_class, "}\n"),
+    x,
+    "\n```" )
+}
+)
+```
+
+
+Taken from https://github.com/Tazinho/Tidyverse-Cookbook.
+
+
+
+# Dates and times
+
+## Dates
+******************
+#### Dates 1
+<!-- #tags: -->
+**Convert a string into a date.**
+<!-- start backside --><br>
+```{r}
+as.Date.character("2016-01-01") # also "2016/01/01" will work
+```
+
+```{r, class="tdvs"}
+lubridate::ymd("2016-01-01") # also "2016/01/01", "20160101" and "2016:01:01" will work
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 2
+<!-- #tags: -->
+**Add days (as an integer) to a date.**
+
+<!-- start backside --><br>
+```{r}
+as.Date.character("2016-01-01") + 5
+```
+
+```{r, class = "tdvs"}
+lubridate::ymd("2016-01-01") + 5
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 3
+<!-- #tags: -->
+**Generate a (dense) sequence of days/weeks/months/years.**
+
+<!-- start backside --><br>
+```{r, class = "tdvs"}
+lubridate::ymd("2016-01-01") + lubridate::days(0:3)
+lubridate::ymd("2016-01-01") + lubridate::weeks(0:3)
+lubridate::ymd("2016-01-01") + lubridate::month(0:3)
+lubridate::ymd("2016-01-01") + lubridate::years(0:3)
+lubridate::ymd("2012-01-01") + lubridate::dyears(1) # adds 365 days also for leap years
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 4
+<!-- #tags: -->
+**Get the exact difference between two dates in days or other units:**
+
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+as.double(difftime(lubridate::ymd_hms("2016-01-01 08:04:20"),
+                   lubridate::ymd_hms("2016-04-01 12:03:00"),
+                   units = "days"))
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 5
+<!-- #tags: -->
+**Get the day of a week as an integer or as its name.**
+
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+lubridate::wday("2016-01-01")
+lubridate::wday("2016-01-01", label = TRUE)
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 6
+<!-- #tags: -->
+**Get the day/month/year from a date.**
+
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+lubridate::day("2016-01-01")
+lubridate::week("2016-01-01")
+lubridate::month("2016-01-01")
+lubridate::month("2016-01-01", label = TRUE)
+lubridate::year("2016-01-01")
+```
+<!-- end backside -->
+
+
+
+******************
+#### Dates 7
+<!-- #tags: -->
+**Get the last day of a month**
+
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+last_day <- function(date) {
+  lubridate::ceiling_date(date, "month") - lubridate::days(1)
+  }
+last_day(lubridate::ymd("2016-01-01"))
+```
+<!-- end backside -->
+
+
+******************
+#### Dates 8
+<!-- #tags: -->
+**Check if a year is a leap/non regular year:**
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+lubridate::leap_year(2011)
+```
+<!-- end backside -->
+
+
+## Dates and Times
+******************
+#### Convert to date-time (and set a specific timezone).
+<!-- #tags: -->
+** **
+
+<!-- start backside --><br>
+```{r}
+
+```
+
+```{r, class = "tdvs"}
+lubridate::ymd_hms("2011-06-04 12:00:00", tz = "Pacific/Auckland")
+```
+<!-- end backside -->
+
+
+******************
+#### Dates and Times 1
+<!-- #tags: -->
+**Get the second/minute/hour from a date.**
+
+<!-- start backside --><br>
+```{r, class = "tdvs"}
+lubridate::second(lubridate::ymd_hms("2011-06-04 12:00:00", tz = "Pacific/Auckland"))
+lubridate::minute(lubridate::ymd_hms("2011-06-04 12:00:00", tz = "Pacific/Auckland"))
+lubridate::hour(lubridate::ymd_hms("2011-06-04 12:00:00", tz = "Pacific/Auckland"))
+```
+<!-- end backside -->
+
+
+******************
+#### Dates and Times 2
+<!-- #tags: -->
+**Change the time depending on a timezone.**
+
+<!-- start backside --><br>
+```{r, class = "tdvs"}
+meeting <- lubridate::ymd_hms("2011-07-01 09:00:00", tz = "Pacific/Auckland")
+lubridate::with_tz(meeting, "America/Chicago")
+```
+<!-- end backside -->
