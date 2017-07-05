@@ -25,7 +25,7 @@ Please check https://github.com/Tazinho/snakecase to learn more!
 <!-- #tags: additional tags for this specific card -->
 **How to convert the names of the iris dataset into snake case**
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(names(iris), case = "snake", preprocess = "\\.")
 ```
@@ -47,7 +47,7 @@ string <- c("BobDylanUSA",
 Tall Drink Of Water"
 ```
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(string, case = "parsed", postprocess = " ")
 ```
@@ -62,7 +62,7 @@ snakecase::to_any_case(string, case = "parsed", postprocess = " ")
 string <- c("ICUDays","SexCode","MAX_of_MLD","Age.Group")
 ```
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(string, case = "small_camel", preprocess = "\\.", postprocess =
 ".")
@@ -79,7 +79,7 @@ snakecase::to_any_case(string, case = "small_camel", preprocess = "\\.", postpro
 string <- "R.Stüdio: v.1.0.143"
 ```
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(string, case = "snake",
             preprocess = ":|(?<!\\d)\\.",
@@ -96,7 +96,7 @@ snakecase::to_any_case(string, case = "snake",
 string <- "R.Stüdio: v.1.0.143"
 ```
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(string, case = "snake",
             protect = "[^[:alnum:]]")
@@ -112,7 +112,7 @@ snakecase::to_any_case(string, case = "snake",
 string <- "HAMBURGCity"
 ```
 
-<!-- start backside --><br>
+<!-- start backside -->
 ```{r}
 snakecase::to_any_case(string, case = "snake")
 ```
